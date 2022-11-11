@@ -48,12 +48,12 @@ public class firstsecond123bot extends TelegramLongPollingBot {
     public String getBotUsername() {
         // Return bot username
         // If bot username is @MyAmazingBot, it must return 'MyAmazingBot'
-        return "firstsecond123bot";
+        return "Your Bot User Name";
     }
 
     @Override
     public String getBotToken() {
         // Return bot token from BotFather
-        return "5791590527:AAEyVq70NSe90a4kkBmJNeop63pwtHDl2U0";
+        return "Your Bot Token";
     }
 }
