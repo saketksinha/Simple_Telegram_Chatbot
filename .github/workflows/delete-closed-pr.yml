@@ -6,6 +6,7 @@ jobs:
    runs-on: ubuntu-latest
    steps:
     - name: delete branch
+      uses: SvanBoxel/delete-merged-branch@main
       env:
        GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
        delete_closed_pr: true
