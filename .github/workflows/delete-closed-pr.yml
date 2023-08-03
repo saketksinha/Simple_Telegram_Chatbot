@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: delete branch
-        uses: actions/checkout@v2
+        uses: SvanBoxel/delete-merged-branch@main
         env:
          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
