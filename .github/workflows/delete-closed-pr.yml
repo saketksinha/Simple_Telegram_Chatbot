@@ -1,13 +1,13 @@
 name: delete branch on close pr
-on: 
+on:
   pull_request:
     types: [closed]
-  
 jobs:
   delete-branch:
-    runs-on: ubuntu-latest
+    runs-on: eg-default
     steps:
-      - name: delete branch
-        uses: actions/checkout@v2
-        env:
-         GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+     - name: Delete closed PR branch
+       uses: dawidd6/action-delete-branch@v3
+       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        numbers: ${{github.event.pull_request.number}}
