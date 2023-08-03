@@ -18,21 +18,17 @@ public class firstsecond123bot extends TelegramLongPollingBot {
 
             message.setText(update.getMessage().getFrom().getFirstName());
         }
-
         if(command.equals("/mylastname")){
 
             System.out.println(update.getMessage().getFrom().getLastName());
 
             message.setText(update.getMessage().getFrom().getLastName());
         }
-
         if(command.equals("/myfullname")) {
             System.out.println(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
 
             message.setText(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
-
         }
-
             message.setChatId(update.getMessage().getChatId());
 
             try {
@@ -40,8 +36,6 @@ public class firstsecond123bot extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-
-
     }
 
     @Override
