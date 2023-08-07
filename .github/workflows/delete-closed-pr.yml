@@ -1,18 +1,24 @@
-name: delete branch on close pr
+name: Test action
+
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+      - master
+
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-  delete-branch:
-    runs-on: ubuntu-latest
-    steps:
-     - name: Delete closed PR branch
-       uses: ./.github/action
-       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        numbers: ${{github.event.pull_request.number}}
+      - name: Create branches
+        run: |
+          git checkout -b prefix-test1-suffix
+          git push -f origin prefix-test1-suffix
+          git checkout -b prefix-test2-suffix
+          git push -f origin prefix-test2-suffix
+      - name: Test action
+        uses: ./.github/action
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         numbers: ${{github.event.pull_request.number}}
