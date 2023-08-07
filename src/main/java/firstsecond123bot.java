@@ -14,6 +14,11 @@ public class firstsecond123bot extends TelegramLongPollingBot {
 
         if(command.equals("/myname")){
 
+
+
+
+            
+
             System.out.println(update.getMessage().getFrom().getFirstName());
 
             message.setText(update.getMessage().getFrom().getFirstName());
