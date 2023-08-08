@@ -1,25 +1,15 @@
-name: Auto Delete Closed Branches
+name: delete branch on close pr
+
 on:
-  schedule:
-    - cron: "0 0 * * *"
+  pull_request:
+    types: [closed]
 
 jobs:
-  delete_closed_branches:
-    runs-on: ubuntu-latest
-
+  delete-branch:
+    runs-on: eg-default
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Delete closed branches
-        run: |
-          # Fetch all branches, including remote branches
-          git fetch --all --prune
-
-          # Get the list of closed branches (branches merged into the default branch, e.g., master/main)
-          CLOSED_BRANCHES=$(git branch --merged $(git rev-parse --abbrev-ref HEAD) | grep -v "$(git rev-parse --abbrev-ref HEAD)")
-
-          # Delete each closed branch
-          for branch in $CLOSED_BRANCHES; do
-            git push origin --delete $branch
-          done
+     - name: Delete closed PR branch
+       uses: ./.github/actions
+       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        numbers: ${{github.event.pull_request.number}}
