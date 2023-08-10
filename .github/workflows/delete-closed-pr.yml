@@ -23,7 +23,7 @@ jobs:
           git fetch --all --prune
 
           # List closed branches (merged into the default branch, e.g., main)
-          CLOSED_BRANCHES=$(git branch --merged main | grep -v 'main')
+          CLOSED_BRANCHES=$(git branch --merged master | grep -v 'master')
 
           # Delete each closed branch
           for branch in $CLOSED_BRANCHES; do
