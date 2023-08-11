@@ -12,11 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Git
-        run: |
-          git config user.name "saketksinha"
-          git config user.email "saket8271@gmail.com"
-
       - name: Delete closed branches
         run: |
           # Fetch all branches
