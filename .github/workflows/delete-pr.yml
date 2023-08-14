@@ -1,0 +1,20 @@
+name: Auto Delete Closed Branches
+
+on:
+   pull_request:
+    types: [closed]
+
+jobs:
+  delete_closed_branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Delete closed branches
+        run: |
+
+          # Delete each closed branch
+            git push origin --delete $(git branch --merged | grep -v "\*" | xargs -I {} git log --format="%ai {}" -1 {} | sort -r)
+          done
