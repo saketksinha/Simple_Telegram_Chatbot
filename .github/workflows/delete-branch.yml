@@ -14,7 +14,7 @@ jobs:
 
     - name: Delete Unmerged Closed Branches
       env:
-        GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+        PAT_TOKEN: ${{ secrets.SECRET_TOKEN }}
       run: |
         git checkout master
         git fetch --prune
