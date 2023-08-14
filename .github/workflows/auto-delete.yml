@@ -1,8 +1,8 @@
 name: Auto Delete Closed Branches
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
+    pull_request:
+        types: [closed]
 
 jobs:
   delete_closed_branches:
