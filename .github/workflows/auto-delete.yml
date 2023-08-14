@@ -1,8 +1,8 @@
 name: Auto Delete Closed Branches
 
 on:
-    pull_request:
-        types: [closed]
+ schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   delete_closed_branches:
@@ -14,6 +14,10 @@ jobs:
 
       - name: Delete closed branches
         run: |
+
+          # Fetch all branches
+          git fetch --all --prune
+          
           # List closed branches (merged into the default branch, e.g., main)
           CLOSED_BRANCHES=$(git branch --merged | grep -v "\*" | xargs -I {} git log --format="%ai {}" -1 {} | sort -r)
 
