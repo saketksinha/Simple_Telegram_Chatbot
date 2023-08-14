@@ -22,6 +22,6 @@ jobs:
 
           # Delete each closed branch
           for branch in $CLOSED_BRANCHES; do
-            git push --delete --force origin $CLOSED_BRANCHES
+            git push origin --delete $CLOSED_BRANCHES
           done
         
