@@ -16,7 +16,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
       run: |
-        git fetch --all --prune
+        git fetch --prune
         git branch --no-color --merged | grep -v '^\*' | xargs -I {} git branch -d {}
         git fetch --prune origin "+refs/pull/*/merge:refs/remotes/origin/pr/*"
         git for-each-ref --format='%(refname:short)' refs/remotes/origin/pr/* | xargs -I {} sh -c 'git push --delete origin {}:'
