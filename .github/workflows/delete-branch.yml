@@ -16,8 +16,9 @@ jobs:
       env:
         PAT_TOKEN: ${{ secrets.SECRET_TOKEN }}
       run: |
-        git fetch --prune
+        
         git checkout master
+        git fetch --prune
         git branch --no-color --merged | grep -v '^\*' | xargs -I {} git branch -d {}
         git fetch --prune origin "+refs/pull/*/merge:refs/remotes/origin/pr/*"
         git for-each-ref --format='%(refname:default)' refs/remotes/origin/pr/* | xargs -I {} sh -c 'git push --delete origin {}:'
