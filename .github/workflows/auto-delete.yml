@@ -18,10 +18,10 @@ jobs:
           git fetch --all --prune
 
           # List closed branches (merged into the default branch, e.g., main)
-          CLOSED_BRANCHES=$(git branch --merged master | grep -v 'master')
+          CLOSED_BRANCHES=$(git branch --merged | grep -v "\*" | xargs -I {} git log --format="%ai {}" -1 {} | sort -r)
 
           # Delete each closed branch
           for branch in $CLOSED_BRANCHES; do
-            git branch --delete $CLOSED_BRANCHES
+            git push origin --delete $branch
           done
         
