@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Delete closed branches
         run: |
           # Fetch all branches
@@ -24,3 +27,4 @@ jobs:
           for branch in $CLOSED_BRANCHES; do
             git push origin --delete $branch
           done
+        
