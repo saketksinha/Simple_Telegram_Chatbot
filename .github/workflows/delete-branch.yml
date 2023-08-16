@@ -1,24 +1,24 @@
-name: Delete Unmerged Closed Branches
+name: Mark stale pull requests
 
 on:
-  pull_request:
-    types: [closed]
+    pull_request:
+     types: [closed]
 
 jobs:
-  cleanup:
-    runs-on: ubuntu-latest
+  stale:
+    runs-on: eg-default
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Delete Unmerged Closed Branches
-      env:
-        PAT_TOKEN: ${{ secrets.SECRET_TOKEN }}
-      run: |
-        
-        git checkout master
-        git fetch --prune
-        git branch --no-color --merged | grep -v '^\*' | xargs -I {} git branch -d {}
-        git fetch --prune origin "+refs/pull/*/merge:refs/remotes/origin/pr/*"
-        git for-each-ref --format='%(refname:default)' refs/remotes/origin/pr/* | xargs -I {} sh -c 'git push --delete origin {}:'
+    - uses: actions/stale@v5
+      with:
+        days-before-stale: 1
+        days-before-close: 1
+        stale-pr-label: 'no-pr-activity'
+        stale-pr-message: 'This pr is stale because it has been open for 30 days with no activity.'
+        close-pr-message: "This pr was closed because it has been inactive for 14 days since being marked as stale."
+        repo-token: ${{ secrets.SECRECT_TOKEN }}
