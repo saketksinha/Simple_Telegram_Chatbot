@@ -6,7 +6,7 @@ on:
 
 jobs:
   stale:
-    runs-on: eg-default
+    runs-on: ubuntu-latest
     
     permissions:
       contents: write
