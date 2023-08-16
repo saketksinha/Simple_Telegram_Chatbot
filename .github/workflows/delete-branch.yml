@@ -17,8 +17,9 @@ jobs:
     - uses: actions/stale@v5
       with:
         days-before-stale: 1
-        days-before-close: 0
-        delete-branch: 0
+        days-before-close: 1
+        delete-branch: 1
         stale-pr-label: 'no-pr-activity'
         stale-pr-message: 'This pr is stale because it has been open for 30 days with no activity.'
         close-pr-message: "This pr was closed because it has been inactive for 14 days since being marked as stale."
+        delete-branch-message: 'This branch is deleted as it has been stale'
