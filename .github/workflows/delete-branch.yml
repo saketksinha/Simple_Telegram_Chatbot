@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Delete closed PR branch
-        uses: saket/action-delete-branch@v3
+        uses: saketksinha/action-delete-branch@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           numbers: ${{github.event.pull_request.number}}
