@@ -6,7 +6,7 @@ on:
 
 jobs:
   delete-branch:
-    runs-on: eg-default
+    runs-on: ubuntu-latest
 
     steps:
       - name: Delete closed PR branch
