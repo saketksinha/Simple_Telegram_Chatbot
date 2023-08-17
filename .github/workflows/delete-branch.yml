@@ -1,25 +1,16 @@
-name: Mark stale pull requests
+name: delete branch on close pr
 
 on:
- schedule:
-    - cron: '0 0 * * *' # run daily at midnight UTC
+  pull_request:
+    types: [closed]
 
 jobs:
-  stale:
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+  delete-branch:
+    runs-on: eg-default
 
     steps:
-    - uses: actions/stale@v8
-      with:
-        days-before-stale: 1
-        days-before-close: 1
-        delete-branch: 1
-        stale-pr-label: 'no-pr-activity'
-        stale-pr-message: 'This pr is stale because it has been open for 30 days with no activity.'
-        close-pr-message: "This pr was closed because it has been inactive for 14 days since being marked as stale."
-      
+      - name: Delete closed PR branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          numbers: ${{github.event.pull_request.number}}
