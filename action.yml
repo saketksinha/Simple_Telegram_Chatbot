@@ -1,6 +1,6 @@
 name: Delete multiple branches
 description: Delete multiple branches from repository
-author: dawidd6
+author: saket
 branding:
   icon: git-branch
   color: red
