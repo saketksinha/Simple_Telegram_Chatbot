@@ -13,9 +13,5 @@ jobs:
 
         with:
           script: |
-            curl -L \
-              -X DELETE \
-                -H "Accept: application/vnd.github+json" \
-                -H "Authorization: Bearer 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" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/saketksinha/Simple_Telegram_Chatbot/git/refs/heads/${{ github.head_ref }}
+
+           curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
