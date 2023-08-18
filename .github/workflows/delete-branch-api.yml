@@ -13,4 +13,17 @@ jobs:
 
         with:
           script: |
-           curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
+           // Octokit.js
+            // https://github.com/octokit/core.js#readme
+            const octokit = new Octokit({
+              auth: ${{secrets.GITHUB_TOKEN}}
+              })
+
+                await octokit.request('DELETE /repos/saketksinha/Simple_Telegram_Chatbot/git/refs/numbers: ${{github.event.pull_request.number}}', {
+                owner: 'saketksinha',
+                repo: 'Simple_Telegram_Chatbot',
+                ref: 'head',
+                headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+                }
+            })
