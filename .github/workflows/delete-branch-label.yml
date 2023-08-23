@@ -12,7 +12,7 @@ jobs:
       - name: Check for label and delete branch
         run: |
           pr_number=${{ github.event.pull_request.number }}
-          label_name="Bug"  # Replace with your label's name
+          label_name="bug"  # Replace with your label's name
           has_label=$(curl -s -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels" | jq -r ".[] | select(.name == \"$label_name\")")
 
