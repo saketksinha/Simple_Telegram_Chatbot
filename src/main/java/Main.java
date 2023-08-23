@@ -8,6 +8,9 @@ public class Main {
         
         try {
 
+
+            
+
             
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             telegramBotsApi.registerBot(new Your Bot Username());
