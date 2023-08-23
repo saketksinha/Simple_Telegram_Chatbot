@@ -5,22 +5,22 @@ on:
     types: [closed, labeled]
 
 jobs:
-  donot-delete-branch-if-labeled:
-    runs-on: ubuntu-latest
-    if: |
-      github.event.action == 'labeled' &&
-      github.event.label.name == 'dependencies'
-    steps:
-      - name: Skipped
-        run: echo "Branch will not be deleted because it's labeled with 'dependencies'"
-        
-  delete-branch-if-not-labeled:
+ delete-branch-if-not-labeled:
      runs-on: ubuntu-latest
      if: |
-       github.event.action == 'closed' &&
-       !contains(github.event.labels.*.name, 'dependencies')
+       github.event.action == 'closed'
      steps:
       - name: This will send branch delete request
         run: |
             curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
             
+ donot-delete-branch-if-labeled:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'bug'
+    steps:
+      - name: Skipped
+        run: echo "Branch will not be deleted because it's labeled with 'bug'"
+        
+  
