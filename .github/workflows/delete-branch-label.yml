@@ -8,9 +8,7 @@ jobs:
   delete-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      
       - name: Check for label and delete branch
         if: github.event.pull_request.merged == true  # Only proceed if the PR was merged
         run: |
