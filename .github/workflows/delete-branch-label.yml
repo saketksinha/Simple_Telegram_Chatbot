@@ -10,8 +10,7 @@ jobs:
     steps:
       - name: This will send branch delete request
         run: |
-          if: | 
-            github.event.label.name == 'dependencies'
+          if: ${{ github.event.label.name != 'dependencies' }}
             then
               echo "Branch deletion prevented due to label
           else
