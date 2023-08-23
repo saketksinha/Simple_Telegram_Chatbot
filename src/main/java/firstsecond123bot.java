@@ -9,6 +9,10 @@ public class firstsecond123bot extends TelegramLongPollingBot {
 
         //System.out.println(update.getMessage().getText());
 
+
+
+        
+
         String command = update.getMessage().getText();
 
         SendMessage message = new SendMessage();
