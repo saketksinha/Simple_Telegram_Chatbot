@@ -16,6 +16,12 @@ public class firstsecond123bot extends TelegramLongPollingBot {
 
 
 
+
+
+
+
+
+        
         
         if(command.equals("/myname")){
 
