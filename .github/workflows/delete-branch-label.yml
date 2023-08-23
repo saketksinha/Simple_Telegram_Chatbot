@@ -10,8 +10,7 @@ jobs:
     if: |
       github.event.action == 'labeled' &&
       github.event.label.name == 'dependencies'
-
-      steps:
+    steps:
       - name: Skipped
         run: echo "Branch will not be deleted because it's labeled with 'dependencies'"
         
