@@ -16,4 +16,4 @@ jobs:
               echo "Branch deletion prevented due to label
           else
             curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
-          fi
+            
