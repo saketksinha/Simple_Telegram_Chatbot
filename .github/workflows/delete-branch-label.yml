@@ -5,7 +5,7 @@ on:
     types: [closed, labeled]
 
 jobs:
-  Donot-delete-branch-if-labeled:
+  donot-delete-branch-if-labeled:
     runs-on: ubuntu-latest
     if: |
       github.event.action == 'labeled' &&
@@ -13,7 +13,7 @@ jobs:
 
       steps:
       - name: Skipped
-        run: echo "Branch will not be deleted because it's not labeled with 'dependencies'"
+        run: echo "Branch will not be deleted because it's labeled with 'dependencies'"
         
   delete-branch-if-not-labeled:
      runs-on: ubuntu-latest
