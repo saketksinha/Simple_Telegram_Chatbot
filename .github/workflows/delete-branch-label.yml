@@ -10,7 +10,6 @@ jobs:
     steps:
       
       - name: Check for label and delete branch
-        if: github.event.pull_request.merged == true  # Only proceed if the PR was merged
         run: |
           pr_number=${{ github.event.pull_request.number }}
           label_name="Bug"  # Replace with your label's name
