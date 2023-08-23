@@ -2,24 +2,14 @@ name: Delete Closed Branches with Label
 
 on:
   pull_request:
-    types: [closed]
+    types: [closed, synchronize]
 
 jobs:
   delete-branch:
     runs-on: ubuntu-latest
     steps:
-      
-      - name: Check for label and delete branch
+      - name: This will send branch delete request
         run: |
-          pr_number=${{ github.event.pull_request.number }}
-          label_name="bug"  # Replace with your label's name
-          has_label=$(curl -s -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels" | jq -r ".[] | select(.name == \"$label_name\")")
-
-          if [[ -n $has_label ]]; then
-            echo "Branch deletion prevented due to label: $label_name"
-          else
-            curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} \
-              "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}"
-            echo "Branch deleted."
-          fi
+          if: github.event.label.name != 'dependencies'
+          curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
+        
