@@ -26,5 +26,3 @@ jobs:
               "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}"
             echo "Branch deleted."
           fi
-        # Continue to the next step regardless of the result of the label check
-        continue-on-error: true
