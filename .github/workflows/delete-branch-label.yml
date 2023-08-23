@@ -1,0 +1,30 @@
+name: Delete Closed Branches with Label
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for label and delete branch
+        if: github.event.pull_request.merged == true  # Only proceed if the PR was merged
+        run: |
+          pr_number=${{ github.event.pull_request.number }}
+          label_name="Bug"  # Replace with your label's name
+          has_label=$(curl -s -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels" | jq -r ".[] | select(.name == \"$label_name\")")
+
+          if [[ -n $has_label ]]; then
+            echo "Branch deletion prevented due to label: $label_name"
+          else
+            curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} \
+              "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}"
+            echo "Branch deleted."
+          fi
+        # Continue to the next step regardless of the result of the label check
+        continue-on-error: true
