@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: This will send branch delete request
         run: |
-          if 
-            github.event.action == 'labeled';
+          if: | 
+            github.event.action == 'labeled'
             then
               echo "Branch deletion prevented due to label
           else
