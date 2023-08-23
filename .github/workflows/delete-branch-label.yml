@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: This will send branch delete request
         run: |
-          if github.event.label.name == 'dependencies'
+          if 
+            github.event.label.name == 'dependencies'
           
           else
           curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
