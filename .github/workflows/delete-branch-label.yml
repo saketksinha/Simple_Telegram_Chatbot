@@ -1,0 +1,17 @@
+name: Delete Closed Branches without Label
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete-branch-if-not-labeled:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed' && !contains(github.event.pull_request.labels.*.name, 'bug')
+    
+    steps:
+      - name: Delete Branch
+        run: |
+          curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} \
+              "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}"
+
