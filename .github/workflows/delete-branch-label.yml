@@ -11,8 +11,6 @@ jobs:
       - name: This will send branch delete request
         run: |
           if: ${{ github.event.label.name != 'dependencies' }}
-            then
-              echo "Branch deletion prevented due to label
           else
             curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
             
