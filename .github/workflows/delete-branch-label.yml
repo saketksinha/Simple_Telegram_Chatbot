@@ -8,7 +8,8 @@ jobs:
  delete-branch-if-not-labeled:
      runs-on: ubuntu-latest
      if: |
-       github.event.action == 'closed'
+       github.event.action == 'closed' &&
+       github.event.label.name == 'bug'
      steps:
       - name: This will send branch delete request
         run: |
