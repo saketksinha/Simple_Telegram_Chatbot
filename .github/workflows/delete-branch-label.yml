@@ -2,7 +2,7 @@ name: Delete Closed Branches with Label
 
 on:
   pull_request:
-    types: [closed]
+    types: [closed, labeled]
 
 jobs:
   delete-branch:
@@ -11,7 +11,7 @@ jobs:
       - name: This will send branch delete request
         run: |
           if 
-            github.event.label.name == 'dependencies'
+            github.event.action == 'labeled'
           else
             curl -s -X DELETE -u username:${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${{ github.head_ref }}
           fi
