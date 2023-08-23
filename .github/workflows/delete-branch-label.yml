@@ -7,8 +7,8 @@ on:
 jobs:
   delete-branch:
     if: |
-      github.event.action == 'labeled' &&
-        github.event.label.name == 'dependencies'
+      github.event.action != 'labeled' &&
+        github.event.label.name != 'dependencies'
     runs-on: ubuntu-latest
     steps:
       - name: This will send branch delete request
